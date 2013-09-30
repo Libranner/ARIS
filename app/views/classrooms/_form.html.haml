@@ -1,0 +1,12 @@
+= simple_form_for(@classroom) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :available_from
+    = f.input :available_until
+    = f.input :sits
+    = f.association :building
+
+  .form-actions
+    = f.button :submit

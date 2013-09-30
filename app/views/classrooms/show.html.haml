@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @classroom.name
+%p
+  %b Available from:
+  = @classroom.available_from
+%p
+  %b Available until:
+  = @classroom.available_until
+%p
+  %b Sits:
+  = @classroom.sits
+%p
+  %b Building:
+  = @classroom.building
+
+= link_to 'Edit', edit_classroom_path(@classroom)
+\|
+= link_to 'Back', classrooms_path
