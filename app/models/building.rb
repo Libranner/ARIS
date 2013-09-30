@@ -4,6 +4,4 @@ class Building < ActiveRecord::Base
   validates :rooms, numericality: {greater_than: 0}
   validates :floors, numericality: {greater_than: 0}
   has_many :classrooms
-
-
 end
