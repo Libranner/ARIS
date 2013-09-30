@@ -30,13 +30,13 @@ The application is configured to send email using a Gmail account.
 
 h2. Getting Started
 
-Cool instructions belong here
+Cool instructions goes here.
 
 h2. Documentation and Support
 
 For the time being, please refer to: https://github.com/Libranner/ARIS-Documentation.
 
-Later will be creating the coolest wiki ever made.
+Later i will be creating the coolest wiki ever made.
 
 h2. Contributing
 
