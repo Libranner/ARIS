@@ -18,7 +18,7 @@ This application uses SQLite with ActiveRecord.
 h2. Development
 
 * Template Engine: Haml
-* Testing Framework: RSpec and Factory Girl
+* Testing Framework: RSpe, Factory Girl and Capybara
 * Front-end Framework: Twitter Bootstrap (Sass)
 * Form Builder: SimpleForm
 * Authentication: Devise
