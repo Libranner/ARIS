@@ -27,7 +27,7 @@ Spork.prefork do
     config.color_enabled = true
     config.formatter = :documentation
 
-    # ## Mock Framework
+    # ## Mock Framework  1
     #
     # If you prefer to use mocha, flexmock or RR, uncomment the appropriate line:
     #
