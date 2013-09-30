@@ -1,0 +1,18 @@
+%p#notice= notice
+
+%p
+  %b Name:
+  = @building.name
+%p
+  %b Abbreviation:
+  = @building.abbreviation
+%p
+  %b Rooms:
+  = @building.rooms
+%p
+  %b Floors:
+  = @building.floors
+
+= link_to 'Edit', edit_building_path(@building)
+\|
+= link_to 'Back', buildings_path
