@@ -1,4 +1,4 @@
-h1. Aris
+h1. ARIS
 
 Interactive System using Augmented Reality
 
