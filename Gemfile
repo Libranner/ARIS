@@ -18,9 +18,6 @@ gem 'simple_form'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
-  gem 'guard-bundler'
-  gem 'guard-rails'
-  gem 'guard-rspec'
   gem 'html2haml'
   gem 'hub', :require=>nil
   gem 'quiet_assets'
@@ -32,6 +29,14 @@ end
 group :development, :test do
   gem 'factory_girl_rails'
   gem 'rspec-rails'
+  gem 'remarkable_activerecord'
+  gem 'guard-bundler'
+  gem 'guard-rails'
+  gem 'guard-rspec'
+  gem 'guard-livereload'
+  gem 'guard-spork'
+  #gem 'growl'
+  gem 'fuubar'
 end
 group :production do
   gem 'unicorn'
