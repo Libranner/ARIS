@@ -3,9 +3,10 @@
 FactoryGirl.define do
   factory :classroom do
     name "GC-101"
-    available_from "2013-09-29 21:20:05"
-    available_until "2013-09-29 21:20:05"
+    available_from 3.hour.ago
+    available_until 2.hour.ago
     sits 1
+    on_floor 1
     building
   end
 end
