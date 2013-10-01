@@ -15,4 +15,10 @@ describe Building do
     building.should have(1).error_on(:rooms)
   end
 
+  it 'validate uniqueness of name field' do
+    create(:building, name: 'Edificio', abbreviation: 'ED')
+    classroom = build(:building,name:'Edificio', abbreviation: 'ED')
+    classroom.should have(1).error_on(:name)
+  end
+
 end
