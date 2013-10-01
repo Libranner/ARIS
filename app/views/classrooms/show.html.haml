@@ -1,21 +1,29 @@
-%p#notice= notice
+- model_class = Classroom
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.titleize
 
 %p
-  %b Name:
+  %strong= model_class.human_attribute_name(:name) + ':'
+  %br
   = @classroom.name
 %p
-  %b Available from:
+  %strong= model_class.human_attribute_name(:available_from) + ':'
+  %br
   = @classroom.available_from
 %p
-  %b Available until:
+  %strong= model_class.human_attribute_name(:available_until) + ':'
+  %br
   = @classroom.available_until
 %p
-  %b Sits:
+  %strong= model_class.human_attribute_name(:sits) + ':'
+  %br
   = @classroom.sits
 %p
-  %b Building:
-  = @classroom.building
+  %strong= model_class.human_attribute_name(:building_id) + ':'
+  %br
+  = @classroom.building.name
 
-= link_to 'Edit', edit_classroom_path(@classroom)
-\|
-= link_to 'Back', classrooms_path
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), classrooms_path, :class => 'btn'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_classroom_path(@classroom), :class => 'btn'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), classroom_path(@classroom), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'
