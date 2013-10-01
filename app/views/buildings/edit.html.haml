@@ -1,7 +1,4 @@
-%h1 Editing building
-
-= render 'form'
-
-= link_to 'Show', @building
-\|
-= link_to 'Back', buildings_path
+- model_class = Building
+.page-header
+  %h1=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize
+= render :partial => "form"

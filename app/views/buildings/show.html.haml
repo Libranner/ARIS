@@ -1,18 +1,25 @@
-%p#notice= notice
+- model_class = Building
+.page-header
+  %h1=t '.title', :default => model_class.model_name.human.titleize
 
 %p
-  %b Name:
+  %strong= model_class.human_attribute_name(:name) + ':'
+  %br
   = @building.name
 %p
-  %b Abbreviation:
+  %strong= model_class.human_attribute_name(:abbreviation) + ':'
+  %br
   = @building.abbreviation
 %p
-  %b Rooms:
+  %strong= model_class.human_attribute_name(:rooms) + ':'
+  %br
   = @building.rooms
 %p
-  %b Floors:
+  %strong= model_class.human_attribute_name(:floors) + ':'
+  %br
   = @building.floors
 
-= link_to 'Edit', edit_building_path(@building)
-\|
-= link_to 'Back', buildings_path
+.form-actions
+  = link_to t('.back', :default => t("helpers.links.back")), buildings_path, :class => 'btn'
+  = link_to t('.edit', :default => t("helpers.links.edit")), edit_building_path(@building), :class => 'btn'
+  = link_to t('.destroy', :default => t("helpers.links.destroy")), building_path(@building), :method => "delete", :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-danger'

@@ -1,11 +1,8 @@
-= simple_form_for(@building) do |f|
-  = f.error_notification
-
-  .form-inputs
-    = f.input :name
-    = f.input :abbreviation
-    = f.input :rooms
-    = f.input :floors
-
+= simple_form_for @building, :html => { :class => 'form-horizontal' } do |f|
+  = f.input :name
+  = f.input :abbreviation
+  = f.input :rooms
+  = f.input :floors
   .form-actions
-    = f.button :submit
+    = f.button :submit, :class => 'btn-primary'
+    = link_to t('.cancel', :default => t("helpers.links.cancel")), buildings_path, :class => 'btn'
