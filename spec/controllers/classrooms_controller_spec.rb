@@ -22,7 +22,7 @@ describe ClassroomsController do
   # This should return the minimal set of attributes required to create a valid
   # Classroom. As you add validations to Classroom, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { "name" => "MyString" } }
+  let(:valid_attributes) { { name: 'GC-102', sits:2, available_from: 2.hour.ago, available_until: 1.hour.ago, on_floor:1 } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
@@ -105,8 +105,8 @@ describe ClassroomsController do
         # specifies that the Classroom created on the previous line
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
-        Classroom.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
-        put :update, {:id => classroom.to_param, :classroom => { "name" => "MyString" }}, valid_session
+        Classroom.any_instance.should_receive(:update_attributes).with({ 'name' => 'GC-102' })
+        put :update, {:id => classroom.to_param, :classroom => { 'name' => 'GC-102' }}, valid_session
       end
 
       it "assigns the requested classroom as @classroom" do
