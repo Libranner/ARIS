@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130929202935) do
+ActiveRecord::Schema.define(:version => 20130930212433) do
 
   create_table "buildings", :force => true do |t|
     t.string   "name"
@@ -20,6 +20,38 @@ ActiveRecord::Schema.define(:version => 20130929202935) do
     t.integer  "floors"
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
+  end
+
+  create_table "classrooms", :force => true do |t|
+    t.string   "name"
+    t.time     "available_from"
+    t.time     "available_until"
+    t.integer  "sits"
+    t.integer  "building_id"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
+    t.integer  "on_floor"
+  end
+
+  add_index "classrooms", ["building_id"], :name => "index_classrooms_on_building_id"
+
+  create_table "offices", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.time     "open_at"
+    t.time     "close_at"
+    t.integer  "building_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "on_floor"
+  end
+
+  add_index "offices", ["building_id"], :name => "index_offices_on_building_id"
+
+  create_table "pruebas", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "roles", :force => true do |t|
