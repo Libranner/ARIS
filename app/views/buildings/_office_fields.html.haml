@@ -1,0 +1,7 @@
+.span10.well
+  = f.input :name
+  = f.input :description, input_html: {rows: 3}
+  = f.input :open_at
+  = f.input :close_at
+  = f.input :on_floor
+  = f.link_to_remove 'Remove', {class: 'pull-right btn btn-small btn-danger'}
