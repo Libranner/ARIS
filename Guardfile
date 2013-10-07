@@ -23,7 +23,7 @@ guard 'livereload' do
 end
 
 guard 'bundler' do
-  watch('Gemfile')
+  #watch('Gemfile')
   # Uncomment next line if Gemfile contain `gemspec' command
   # watch(/^.+\.gemspec/)
 end
