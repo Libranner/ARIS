@@ -15,6 +15,8 @@ gem 'figaro'
 gem 'haml-rails'
 gem 'rolify'
 gem 'simple_form'
+gem 'twitter-bootstrap-rails'
+gem 'nested_form'
 group :development do
   gem 'better_errors'
   gem 'binding_of_caller', :platforms=>[:mri_19, :mri_20, :rbx]
@@ -25,6 +27,7 @@ group :development do
   gem 'rb-fchange', :require=>false
   gem 'rb-fsevent', :require=>false
   gem 'rb-inotify', :require=>false
+
 end
 group :development, :test do
   gem 'factory_girl_rails'
@@ -35,7 +38,7 @@ group :development, :test do
   gem 'guard-rspec'
   gem 'guard-livereload'
   gem 'guard-spork'
-  #gem 'growl'
+  gem 'debugger'
   gem 'fuubar'
 end
 group :production do
