@@ -41,7 +41,6 @@ class OfficesController < ApplicationController
   # POST /offices.json
   def create
     @office = Office.new(params[:office])
-
     respond_to do |format|
       if @office.save
         format.html { redirect_to @office, notice: 'Office was successfully created.' }
