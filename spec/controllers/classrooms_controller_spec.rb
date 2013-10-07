@@ -22,7 +22,7 @@ describe ClassroomsController do
   # This should return the minimal set of attributes required to create a valid
   # Classroom. As you add validations to Classroom, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) { { name: 'GC-102', sits:2, available_from: 2.hour.ago, available_until: 1.hour.ago, on_floor:1 } }
+  let(:valid_attributes) { { name: 'GC-102', sits:2, on_floor:1 } }
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in

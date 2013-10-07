@@ -6,10 +6,12 @@ describe Classroom do
     classroom.should have(1).error_on(:sits)
   end
 
+=begin
   it 'validate field available_until is greater than field available_from' do
-    classroom = build(:classroom, sits:2, available_from: 1.hour.ago, available_until: 2.hour.ago)
+    classroom = build(:classroom, sits:2)
     classroom.should have(1).error_on(:available_from)
   end
+=end
 
 =begin
   it 'validate presence of fields available_from and available_until' do
@@ -20,8 +22,8 @@ describe Classroom do
 =end
 
   it 'validate uniqueness of name field' do
-    create(:classroom,name: 'Aula 1', sits:2, available_from: 3.hour.ago, available_until: 2.hour.ago)
-    classroom = build(:classroom,name: 'Aula 1', sits:2, available_from: 3.hour.ago, available_until: 2.hour.ago)
+    create(:classroom,name: 'Aula 1', sits:2)
+    classroom = build(:classroom,name: 'Aula 1', sits:2)
     classroom.should have(1).error_on(:name)
   end
 
