@@ -17,7 +17,7 @@ ARIS::Application.configure do
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   config.action_mailer.delivery_method = :smtp
   # change to true to allow email to be sent during development
-  config.action_mailer.perform_deliveries = false
+  config.action_mailer.perform_deliveries = true
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.default :charset => "utf-8"
 
@@ -41,14 +41,25 @@ ARIS::Application.configure do
   # Expands the lines which load the assets
   config.assets.debug = true
 
+=begin
+  ActionMailer::Base.smtp_settings = {
+      address: 'smtp.gmail.com',
+      port: 587,
+      domain:'gmail.com', #ENV['DOMAIN_NAME'],
+      authentication: 'plain',
+      enable_starttls_auto: true,
+      user_name: ENV['GMAIL_USERNAME'],
+      password: ENV['GMAIL_PASSWORD'],
+      enable_starttls_auto: true
+  }
+=end
+
   config.action_mailer.smtp_settings = {
-    address: "smtp.gmail.com",
-    port: 587,
-    domain: ENV["DOMAIN_NAME"],
-    authentication: "plain",
-    enable_starttls_auto: true,
-    user_name: ENV["GMAIL_USERNAME"],
-    password: ENV["GMAIL_PASSWORD"]
+      :address   => "smtp.mandrillapp.com",
+      :port      => 25,
+      enable_starttls_auto: true,
+      :user_name => ENV["MANDRILL_USERNAME"],
+      :password  => ENV["MANDRILL_API_KEY"]
   }
 
 end

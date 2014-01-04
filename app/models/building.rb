@@ -4,6 +4,10 @@ class Building < ActiveRecord::Base
   validates :rooms, numericality: {greater_than: 0}
   validates :floors, numericality: {greater_than: 0}
   validates :name, uniqueness: true
+  validates :floors, presence: true
+  validates :rooms, presence: true
+  validates :name, presence: true
+
   has_many :classrooms
   has_many :offices
   accepts_nested_attributes_for :classrooms, allow_destroy: true

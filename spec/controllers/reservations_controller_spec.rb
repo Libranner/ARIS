@@ -20,20 +20,21 @@ require 'spec_helper'
 
 describe ReservationsController do
 
-  # This should return the minimal set of attributes required to create a valid
-  # Reservation. As you add validations to Reservation, be sure to
-  # adjust the attributes here as well.
-  let(:valid_attributes) { { "name" => "MyString" } }
+  before (:each) do
+    @user = FactoryGirl.create(:user)
+    @user.add_role(:admin)
+    sign_in @user
+  end
 
-  # This should return the minimal set of values that should be in the session
-  # in order to pass any filters (e.g. authentication) defined in
-  # ReservationsController. Be sure to keep this updated too.
-  let(:valid_session) { {} }
+
+  let(:valid_attributes) { {     name: 'MyString', description: 'MyText', state_id: 1, email_petitioner: 'l@homai.com',
+  start: 2.hour.ago,  finish: 1.hour.ago, classroom_id: 1 } }
+
 
   describe "GET index" do
     it "assigns all reservations as @reservations" do
       reservation = Reservation.create! valid_attributes
-      get :index, {}, valid_session
+      get :index, {}
       assigns(:reservations).should eq([reservation])
     end
   end
@@ -41,14 +42,14 @@ describe ReservationsController do
   describe "GET show" do
     it "assigns the requested reservation as @reservation" do
       reservation = Reservation.create! valid_attributes
-      get :show, {:id => reservation.to_param}, valid_session
+      get :show, {:id => reservation.to_param}
       assigns(:reservation).should eq(reservation)
     end
   end
 
   describe "GET new" do
     it "assigns a new reservation as @reservation" do
-      get :new, {}, valid_session
+      get :new, {}
       assigns(:reservation).should be_a_new(Reservation)
     end
   end
@@ -56,7 +57,7 @@ describe ReservationsController do
   describe "GET edit" do
     it "assigns the requested reservation as @reservation" do
       reservation = Reservation.create! valid_attributes
-      get :edit, {:id => reservation.to_param}, valid_session
+      get :edit, {:id => reservation.to_param}
       assigns(:reservation).should eq(reservation)
     end
   end
@@ -65,18 +66,18 @@ describe ReservationsController do
     describe "with valid params" do
       it "creates a new Reservation" do
         expect {
-          post :create, {:reservation => valid_attributes}, valid_session
+          post :create, {:reservation => valid_attributes}
         }.to change(Reservation, :count).by(1)
       end
 
       it "assigns a newly created reservation as @reservation" do
-        post :create, {:reservation => valid_attributes}, valid_session
+        post :create, {:reservation => valid_attributes}
         assigns(:reservation).should be_a(Reservation)
         assigns(:reservation).should be_persisted
       end
 
       it "redirects to the created reservation" do
-        post :create, {:reservation => valid_attributes}, valid_session
+        post :create, {:reservation => valid_attributes}
         response.should redirect_to(Reservation.last)
       end
     end
@@ -85,14 +86,14 @@ describe ReservationsController do
       it "assigns a newly created but unsaved reservation as @reservation" do
         # Trigger the behavior that occurs when invalid params are submitted
         Reservation.any_instance.stub(:save).and_return(false)
-        post :create, {:reservation => { "name" => "invalid value" }}, valid_session
+        post :create, {:reservation => { "name" => "invalid value" }}
         assigns(:reservation).should be_a_new(Reservation)
       end
 
       it "re-renders the 'new' template" do
         # Trigger the behavior that occurs when invalid params are submitted
         Reservation.any_instance.stub(:save).and_return(false)
-        post :create, {:reservation => { "name" => "invalid value" }}, valid_session
+        post :create, {:reservation => { "name" => "invalid value" }}
         response.should render_template("new")
       end
     end
@@ -107,18 +108,18 @@ describe ReservationsController do
         # receives the :update_attributes message with whatever params are
         # submitted in the request.
         Reservation.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
-        put :update, {:id => reservation.to_param, :reservation => { "name" => "MyString" }}, valid_session
+        put :update, {:id => reservation.to_param, :reservation => { "name" => "MyString" }}
       end
 
       it "assigns the requested reservation as @reservation" do
         reservation = Reservation.create! valid_attributes
-        put :update, {:id => reservation.to_param, :reservation => valid_attributes}, valid_session
+        put :update, {:id => reservation.to_param, :reservation => valid_attributes}
         assigns(:reservation).should eq(reservation)
       end
 
       it "redirects to the reservation" do
         reservation = Reservation.create! valid_attributes
-        put :update, {:id => reservation.to_param, :reservation => valid_attributes}, valid_session
+        put :update, {:id => reservation.to_param, :reservation => valid_attributes}
         response.should redirect_to(reservation)
       end
     end
@@ -128,7 +129,7 @@ describe ReservationsController do
         reservation = Reservation.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Reservation.any_instance.stub(:save).and_return(false)
-        put :update, {:id => reservation.to_param, :reservation => { "name" => "invalid value" }}, valid_session
+        put :update, {:id => reservation.to_param, :reservation => { "name" => "invalid value" }}
         assigns(:reservation).should eq(reservation)
       end
 
@@ -136,7 +137,7 @@ describe ReservationsController do
         reservation = Reservation.create! valid_attributes
         # Trigger the behavior that occurs when invalid params are submitted
         Reservation.any_instance.stub(:save).and_return(false)
-        put :update, {:id => reservation.to_param, :reservation => { "name" => "invalid value" }}, valid_session
+        put :update, {:id => reservation.to_param, :reservation => { "name" => "invalid value" }}
         response.should render_template("edit")
       end
     end
@@ -146,13 +147,13 @@ describe ReservationsController do
     it "destroys the requested reservation" do
       reservation = Reservation.create! valid_attributes
       expect {
-        delete :destroy, {:id => reservation.to_param}, valid_session
+        delete :destroy, {:id => reservation.to_param}
       }.to change(Reservation, :count).by(-1)
     end
 
     it "redirects to the reservations list" do
       reservation = Reservation.create! valid_attributes
-      delete :destroy, {:id => reservation.to_param}, valid_session
+      delete :destroy, {:id => reservation.to_param}
       response.should redirect_to(reservations_url)
     end
   end

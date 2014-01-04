@@ -1,23 +1,30 @@
 - model_class = Building
 .page-header
-  %h1=t '.title', :default => model_class.model_name.human.titleize
+  %h1= "Building: #{@building.name}"
 
-%p
-  %strong= model_class.human_attribute_name(:name) + ':'
-  %br
-  = @building.name
-%p
-  %strong= model_class.human_attribute_name(:abbreviation) + ':'
-  %br
-  = @building.abbreviation
-%p
-  %strong= model_class.human_attribute_name(:rooms) + ':'
-  %br
-  = @building.rooms
-%p
-  %strong= model_class.human_attribute_name(:floors) + ':'
-  %br
-  = @building.floors
+.row-fluid
+  = simple_nested_form_for @building, :html => { :class => 'form-horizontal' } do |f|
+    .row-fluid
+      .span6
+        = f.input :name, disabled: true
+        = f.input :abbreviation, disabled: true
+        = f.input :rooms, disabled: true
+        = f.input :floors, disabled: true
+      .span6
+        .pull-right
+          = image_tag('building.png')
+      %ul.nav.nav-tabs#tab
+        %li
+          %a{"data-toggle" => "tab", href: "#div_classrooms"} Classrooms
+        %li
+          %a{"data-toggle" => "tab", href: "#div_offices"} Offices
+      .tab-content
+        #div_classrooms.tab-pane.active
+          = f.fields_for :classrooms, @building.classrooms do |builder|
+            = render :partial => 'classroom_fields', :locals => {f: builder, disabled: true}
+        #div_offices.tab-pane
+          = f.fields_for :offices, @building.offices do |builder|
+            = render :partial => 'office_fields', :locals => {f: builder, disabled: true}
 
 .form-actions
   = link_to t('.back', :default => t("helpers.links.back")), buildings_path, :class => 'btn'

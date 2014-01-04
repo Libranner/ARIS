@@ -1,8 +1,33 @@
 class ReservationsController < ApplicationController
+  load_and_authorize_resource
   # GET /reservations
   # GET /reservations.json
   def index
-    @reservations = Reservation.all
+
+    unless params[:date_selected].nil?
+      start_date = params[:date_selected] ? params[:date_selected] : params['/reservations'][:start]
+      finish_date = params[:date_selected] ? params[:date_selected] : params['/reservations'][:finish]
+    end
+
+    classroom_id =
+        if params['/reservations'].nil? || params['/reservations'][:classroom_id].nil?
+          ''
+        else
+          params['/reservations'][:classroom_id]
+        end
+
+
+    if params[:view] == '1' || params[:view].nil?
+      if start_date.nil? || finish_date.nil?
+        @reservations = Reservation.search('','','',params[:page])
+      else
+        @reservations = Reservation.search(start_date,finish_date,classroom_id , params[:page])
+      end
+    else
+      @reservations = Reservation.all
+      @reservations_by_date = @reservations.group_by(&:start_date)
+      @date = params[:date] ? Date.parse(params[:date]) : Date.today
+    end
 
     respond_to do |format|
       format.html # index.html.erb
@@ -57,9 +82,9 @@ class ReservationsController < ApplicationController
   # PUT /reservations/1.json
   def update
     @reservation = Reservation.find(params[:id])
-
     respond_to do |format|
       if @reservation.update_attributes(params[:reservation])
+        #ReservationMailer.status_changed(self).deliver if @reservation.state_id_changed?
         format.html { redirect_to @reservation, notice: 'Reservation was successfully updated.' }
         format.json { head :no_content }
       else

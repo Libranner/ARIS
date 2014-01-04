@@ -1,4 +1,33 @@
-%h3 Home Reload
-- @users.each do |user|
-  %p
-    User: #{link_to user.name, user}
+
+.span10.centered
+  %h3 Welcome! Please choose one of this 4 mains activities:
+  %br
+  %ul.thumbnails
+    %li.thumbnail_link.span3
+      = link_to(Reservation) do
+        .thumbnail
+          = image_tag('schedule_blue.png', input_html:{class: 'centered'})
+          .well
+            %h3 Reservations
+            %p Reservations administration and monitoring...
+    %li.thumbnail_link.span3
+      = link_to(Building) do
+        .thumbnail
+          = image_tag('building.png', input_html:{class: 'centered'})
+          .well
+            %h3 Buildings
+            %p Buildings, classrooms and offices maintenance...
+    %li.thumbnail_link.span3
+      = link_to(User) do
+        .thumbnail
+          = image_tag('User.png', input_html:{class: 'centered'})
+          .well
+            %h3 Users
+            %p Create and update system user, permissions...
+    %li.thumbnail_link.span3
+      = link_to do
+        .thumbnail
+          = image_tag('pending.png', input_html:{class: 'centered'})
+          .well
+            %h3 AR Data
+            %p Create markers and AR support material...

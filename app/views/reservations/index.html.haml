@@ -1,27 +1,12 @@
 - model_class = Reservation
 .page-header
   %h1=t '.title', :default => model_class.model_name.human.pluralize.titleize
-%table.table.table-striped
-  %thead
-    %tr
-      %th= model_class.human_attribute_name(:id)
-      %th= model_class.human_attribute_name(:name)
-      %th= model_class.human_attribute_name(:description)
-      %th= model_class.human_attribute_name(:status)
-      %th= model_class.human_attribute_name(:email_petitioner)
-      %th= model_class.human_attribute_name(:created_at)
-      %th=t '.actions', :default => t("helpers.actions")
-  %tbody
-    - @reservations.each do |reservation|
-      %tr
-        %td= link_to reservation.id, reservation_path(reservation)
-        %td= reservation.name
-        %td= reservation.description
-        %td= reservation.status
-        %td= reservation.email_petitioner
-        %td=l reservation.created_at
-        %td
-          = link_to t('.edit', :default => t("helpers.links.edit")), edit_reservation_path(reservation), :class => 'btn btn-mini'
-          = link_to t('.destroy', :default => t("helpers.links.destroy")), reservation_path(reservation), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-mini btn-danger'
+
+- if params[:view] == '1' || params[:view].nil?
+  = render partial: 'search_bar'
+  = render :partial => 'list_view'
+- else
+  = render :partial => 'calendar_view'
+
 
 = link_to t('.new', :default => t("helpers.links.new")), new_reservation_path, :class => 'btn btn-primary'

@@ -1,6 +1,7 @@
 class BuildingsController < ApplicationController
   # GET /buildings
   # GET /buildings.json
+  load_and_authorize_resource
   def index
     @buildings = Building.all
 

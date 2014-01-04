@@ -1,28 +1,33 @@
 .row-fluid
   = simple_nested_form_for @building, :html => { :class => 'form-horizontal' } do |f|
-    = f.input :name
-    = f.input :abbreviation
-    = f.input :rooms
-    = f.input :floors
-    %ul.nav.nav-tabs#tab
-      %li
-        %a{"data-toggle" => "tab", href: "#div_classrooms"} Classrooms
-      %li
-        %a{"data-toggle" => "tab", href: "#div_offices"} Offices
-    .tab-content
-      #div_classrooms.tab-pane.active
-        = f.link_to_add 'Add a Classroom', :classrooms, {class: 'btn btn-small btn-primary pull-right'}
-        .span10
-          = f.fields_for :classrooms
-      #div_offices.tab-pane
-        = f.link_to_add 'Add a Office', :offices, {class: 'btn btn-small btn-primary pull-right'}
-        .span10
-          = f.fields_for :offices
+    = render partial: 'shared/errors', locals: {model: @building}
+    #building-form.row-fluid
+      .span6
+        = f.input :name, required: true
+        = f.input :abbreviation, required: true
+        = f.input :rooms, required: true
+        = f.input :floors, required: true
+      .span6
+        .pull-right
+          = image_tag('building.png')
+      %ul.nav.nav-tabs#tab
+        %li
+          %a{"data-toggle" => "tab", href: "#div_classrooms"} Classrooms
+        %li
+          %a{"data-toggle" => "tab", href: "#div_offices"} Offices
+      .tab-content
+        #div_classrooms.tab-pane.active
+          = f.link_to_add 'Add a Classroom', :classrooms, {class: 'btn btn-small btn-primary pull-right'}
+          = f.fields_for :classrooms, @building.classrooms do |builder|
+            = render :partial => 'classroom_fields', :locals => {f: builder, disabled: false}
+        #div_offices.tab-pane
+          = f.link_to_add 'Add a Office', :offices, {class: 'btn btn-small btn-primary pull-right'}
+          = f.fields_for :offices, @building.offices do |builder|
+            = render :partial => 'office_fields', :locals => {f: builder, disabled: false}
 
-    .span12
-      .form-actions
-        = f.button :submit, :class => 'btn-primary'
-        = link_to t('.cancel', :default => t("helpers.links.cancel")), buildings_path, :class => 'btn'
+    .form-actions
+      = f.button :submit, :class => 'btn-primary'
+      = link_to t('.cancel', :default => t("helpers.links.cancel")), buildings_path, :class => 'btn'
 
 :javascript
   $(document).ready(function() {

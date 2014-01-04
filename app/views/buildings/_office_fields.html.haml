@@ -1,7 +1,8 @@
 .span10.well
-  = f.input :name
-  = f.input :description, input_html: {rows: 3}
-  = f.input :open_at
-  = f.input :close_at
-  = f.input :on_floor
-  = f.link_to_remove 'Remove', {class: 'pull-right btn btn-small btn-danger'}
+  = f.input :name, disabled: disabled
+  = f.input :description, input_html: {rows: 3}, disabled: disabled
+  = f.input :open_at, disabled: disabled
+  = f.input :close_at, disabled: disabled
+  = f.input :on_floor, disabled: disabled
+  - unless disabled
+    = f.link_to_remove 'Remove', {class: 'pull-right btn btn-small btn-danger'}

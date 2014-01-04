@@ -1,17 +1,49 @@
-= link_to "Aris", root_path, :class => 'brand'
-%ul.nav
-  - if user_signed_in?
-    %li
-      = link_to 'Logout', destroy_user_session_path, :method=>'delete'
-  - else
-    %li
-      = link_to 'Login', new_user_session_path
-  - if user_signed_in?
-    %li
-      = link_to 'Edit account', edit_user_registration_path
-    - if current_user.has_role? :admin
-      %li
-        = link_to 'Admin', users_path
-  - else
-    %li
-      = link_to 'Sign up', new_user_registration_path
+.navbar.navbar-fluid-top
+  .navbar-inner
+    .container-fluid
+      %a.btn.btn-navbar(data-target='.nav-collapse' data-toggle='collapse')
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.brand{'data-placement' => 'top left','data-toggle' => 'tooltip', href: '#', id: 'brand', title: 'ARIS. Interactive system using Augmented Reality.'}
+        = image_tag('logo-ARIS.png', alt: 'ARIS', class: 'logo-app')
+      .container.nav-collapse
+        %ul.nav
+          %li
+            = link_to root_path do
+              %i.icon-home
+              Home
+          %li
+            = link_to reservations_path do
+              %i.icon-calendar
+              Reservations
+          %li
+            = link_to buildings_path do
+              %i.icon-th
+              Buildings
+          %li
+            = link_to users_path do
+              %i.icon-user
+              Users
+          %li
+            = link_to root_path do
+              %i.icon-qrcode
+              AR Data
+        %ul.nav.pull-right
+          - if user_signed_in?
+            %li
+              = link_to "You are logged as: #{current_user.name}", edit_user_registration_path
+            - if current_user.has_role? :admin
+              %li
+                = link_to 'Admin', users_path
+          - if user_signed_in?
+            %li
+              = link_to 'Logout', destroy_user_session_path, :method=>'delete'
+          - else
+            %li
+              = link_to 'Login', new_user_session_path
+          -#- else
+          -#  %li
+          -#    = link_to 'Sign up', new_user_registration_path
+:javascript
+  $('#brand').tooltip()

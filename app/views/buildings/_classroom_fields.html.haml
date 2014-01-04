@@ -1,5 +1,6 @@
 .span6.well
-  = f.input :name
-  = f.input :sits
-  = f.input :on_floor
-  = f.link_to_remove 'Remove', {class: 'pull-right btn btn-small btn-danger'}
+  = f.input :name, disabled: disabled
+  = f.input :sits, disabled: disabled
+  = f.input :on_floor, disabled: disabled
+  - unless disabled
+    = f.link_to_remove 'Remove', {class: 'pull-right btn btn-small btn-danger'}

@@ -1,0 +1,10 @@
+.well
+  = simple_form_for reservations_path, :method => 'get', class:'form-search span6' do |f|
+    = f.input :start, as: :date_time_picker, label: 'Start', input_html: {class: 'date-only'}, wrapper_html:{class: 'span3'}
+    = f.input :finish, as: :date_time_picker, label: 'End',  input_html: {class: 'date-only'}, wrapper_html:{class: 'span3'}
+    .span3.control-group
+      = f.label :classroom_id, label: 'Room'
+      .controls
+        = f.collection_select :classroom_id, Classroom.all, :id, :name, include_blank: true, input_html:{class: 'span12'}
+    = button_tag(type: 'submit', id: 'btn-search', class: 'btn') do
+      %i.icon-search

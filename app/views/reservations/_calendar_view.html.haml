@@ -1,0 +1,14 @@
+.well
+  .btn-group{"data-toggle" => "buttons-radio"}
+    = link_to 'List View', {view: 1}, class: 'btn btn-primary'
+    = link_to 'Calendar View', {view: 2}, class: 'btn btn-primary active'
+
+#cv-reservations
+  %h2#month
+    = link_to "<", {date: @date.prev_month, view: 2}
+    = @date.strftime("%B %Y")
+    = link_to ">", {date: @date.next_month, view: 2}
+  = calendar @date do |date|
+    = date.day
+    - if @reservations_by_date[date]
+      = link_to @reservations_by_date[date].count, {date_selected: date}, class: 'badge badge-important'

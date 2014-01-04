@@ -4,7 +4,10 @@ FactoryGirl.define do
   factory :reservation do
     name "MyString"
     description "MyText"
-    status 1
+    state_id 1
     email_petitioner "MyString"
+    start 2.hour.ago
+    finish 1.hour.ago
+    classroom_id 1
   end
 end

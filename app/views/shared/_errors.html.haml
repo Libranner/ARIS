@@ -1,0 +1,9 @@
+- if model.errors.any?
+  .alert.alert-error
+    %a.close{"data-dismiss" => 'alert'}
+      ×
+    #error_explanation
+      %h4= "#{pluralize(model.errors.count, "error")} prohibited this trip from being saved:"
+      %ul
+        - model.errors.full_messages.each do |msg|
+          %li= msg

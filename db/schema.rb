@@ -11,7 +11,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130930212433) do
+ActiveRecord::Schema.define(:version => 20131018181017) do
+
+  create_table "areas", :force => true do |t|
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "buildings", :force => true do |t|
     t.string   "name"
@@ -24,16 +31,25 @@ ActiveRecord::Schema.define(:version => 20130930212433) do
 
   create_table "classrooms", :force => true do |t|
     t.string   "name"
-    t.time     "available_from"
-    t.time     "available_until"
     t.integer  "sits"
     t.integer  "building_id"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.integer  "on_floor"
+    t.integer  "reservation_id"
   end
 
   add_index "classrooms", ["building_id"], :name => "index_classrooms_on_building_id"
+
+  create_table "events", :force => true do |t|
+    t.string   "name"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.text     "description"
+    t.integer  "sits"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+  end
 
   create_table "offices", :force => true do |t|
     t.string   "name"
@@ -48,10 +64,18 @@ ActiveRecord::Schema.define(:version => 20130930212433) do
 
   add_index "offices", ["building_id"], :name => "index_offices_on_building_id"
 
-  create_table "pruebas", :force => true do |t|
+  create_table "reservations", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.text     "description"
+    t.integer  "status"
+    t.string   "email_petitioner"
+    t.datetime "created_at",       :null => false
+    t.datetime "updated_at",       :null => false
+    t.integer  "state_id"
+    t.text     "notes"
+    t.datetime "finish"
+    t.datetime "start"
+    t.integer  "classroom_id"
   end
 
   create_table "roles", :force => true do |t|
@@ -64,6 +88,12 @@ ActiveRecord::Schema.define(:version => 20130930212433) do
 
   add_index "roles", ["name", "resource_type", "resource_id"], :name => "index_roles_on_name_and_resource_type_and_resource_id"
   add_index "roles", ["name"], :name => "index_roles_on_name"
+
+  create_table "states", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

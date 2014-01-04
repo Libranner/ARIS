@@ -1,4 +1,5 @@
 = simple_form_for @classroom, :html => { :class => 'form-horizontal' } do |f|
+  = render partial: 'shared/errors', locals: {model: @classroom}
   = f.input :name
   = f.input :available_from
   = f.input :available_until
