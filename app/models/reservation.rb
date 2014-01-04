@@ -84,7 +84,7 @@ class Reservation < ActiveRecord::Base
       reservations = Reservation.where(['classroom_id = ?', room_id])
       reservations.paginate per_page: 10, page: page , order: 'start'
     else
-      paginate per_page: 1, page: page ,:order => 'start'
+      paginate per_page: 10, page: page ,:order => 'start'
     end
   end
 
